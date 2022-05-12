@@ -10,6 +10,9 @@ import { GifsPageComponent } from './gifs-page/gifs-page.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    GifsPageComponent
   ]
 })
 export class GifsModule { }
