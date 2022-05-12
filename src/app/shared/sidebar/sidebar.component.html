@@ -4,7 +4,11 @@
     <hr class="text-light">
 
     <div class="list-group list-reset">
-        <a class="list-group-item list-group-item-action" href="#"> Dashboard </a>
+        <a *ngFor="let gif of history"
+           class="list-group-item list-group-item-action" 
+           href="#"> 
+           {{ gif }}
+        </a>
     </div>
   </div>
   <!-- sidebar end -->
