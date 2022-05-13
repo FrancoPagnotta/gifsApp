@@ -15,7 +15,9 @@ export class GifsService {
     return [...this._history];
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+      this._history = JSON.parse(localStorage.getItem('history')!) || [];
+  }
 
   searchGifs(value: string) {
     value = value.trim().toLowerCase();
