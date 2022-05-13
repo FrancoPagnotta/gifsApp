@@ -5,7 +5,8 @@
 
     <div class="list-group list-reset">
         <a *ngFor="let gif of history"
-           class="list-group-item list-group-item-action" 
+           (click)="search(gif)"
+           class="list-group-item list-group-item-action mb-1" 
            href="#"> 
            {{ gif | titlecase }}
         </a>
