@@ -23,6 +23,8 @@ export class GifsService {
     if (!this._history.includes(value)) {
       this._history.unshift(value);
       this._history = this._history.splice(0, 10);
+
+      localStorage.setItem('history', JSON.stringify(this._history));
     }
 
     this.http.get<SearchGifsResponse>(`${this.url}?api_key=${this.apiKey}&q=${value}&limit=10`)
