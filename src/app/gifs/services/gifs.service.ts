@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Gif, SearchGifsResponse } from '../interface/gifs.interface';
 
@@ -6,9 +6,10 @@ import { Gif, SearchGifsResponse } from '../interface/gifs.interface';
   providedIn: 'root'
 })
 export class GifsService {
-  private _history: string[] = [];
+
   private url: string = 'https://api.giphy.com/v1/gifs/search';
   private apiKey: string = '7anxXHJ1cXFwX77VNUYmS7rtKZFQ7Ejl';
+  private _history: string[] = [];
   public results: Gif[] = [];
 
   get history() {
@@ -30,7 +31,12 @@ export class GifsService {
       localStorage.setItem('history', JSON.stringify(this._history));
     }
 
-    this.http.get<SearchGifsResponse>(`${this.url}?api_key=${this.apiKey}&q=${value}&limit=10`)
+    const params = new HttpParams()
+                        .set('api_key', this.apiKey)
+                        .set('q', value)
+                        .set('limit', 10); 
+
+    this.http.get<SearchGifsResponse>(`${this.url}`, { params: params }) // Here also we can use only params, because params: params is the same as only params, the two properties has the same name.
       .subscribe(resp =>  {
         this.results = resp.data;
         localStorage.setItem('results', JSON.stringify(this.results));
